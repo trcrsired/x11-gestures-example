@@ -21,10 +21,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             return 0;
         case WM_LBUTTONDOWN: // 处理鼠标左键按下事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_LBUTTONDOWN\n");
-            return 0;
+            break;
+//            return 0;
         case WM_LBUTTONUP: // 处理鼠标左键按下事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_LBUTTONUP\n");
-            return 0;
+            break;
+//            return 0;
         case WM_RBUTTONDOWN: // 处理鼠标右键按下事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_RBUTTONDOWN\n");
             return 0;
@@ -35,12 +37,21 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             return 0;
         case WM_POINTERDOWN: // 处理指针按下事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_POINTERDOWN\n");
-            return 0;
+            return 0; // 返回0表示消息已处理
+            break;
         case WM_POINTERUP: // 处理指针抬起事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_POINTERUP\n");
-            return 0;
+            return 0;   // 返回0表示消息已处理
+            break;
         case WM_POINTERUPDATE: // 处理指针移动事件
             perr(std::source_location::current(),"\t",localiso8601,": WM_POINTERUPDATE\n");
+            return 0;   // 返回0表示消息已处理
+            break;
+        case WM_LBUTTONDBLCLK: // 处理鼠标左键双击事件
+            perr(std::source_location::current(),"\t",localiso8601,": WM_LBUTTONDBLCLK\n");
+            return 0;
+        case WM_GESTURE: // 处理手势事件
+            perr(std::source_location::current(),"\t",localiso8601,": WM_GESTURE\n");
             return 0;
         case WM_TOUCH: // 处理触控事件
         {
@@ -102,7 +113,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     ShowWindow(hwnd, nCmdShow);
 
     // 启用触控功能
-//    RegisterTouchWindow(hwnd, 0);
+    // RegisterTouchWindow(hwnd, 0);
 
     // 运行消息循环
     MSG msg = {};
